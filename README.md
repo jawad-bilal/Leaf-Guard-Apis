@@ -11,18 +11,15 @@ python -m venv .venv
 pip install -r requirements.txt
 # Optional local fallback if LiteRT fails on Windows:
 # pip install tensorflow
-uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+uvicorn main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 ## Deploy on Vercel (this folder = repo root)
 
-1. Push **only this `backend` folder** as its own GitHub repo.
-2. Vercel → import that repo (Framework: Other / FastAPI auto-detect).
-3. Add env var (optional if using AetherLeaf URL already allowed in code):
-   - `FRONTEND_ORIGIN` = `https://aetherleaf.vercel.app`
+1. Push this repo to GitHub and import in Vercel.
+2. Framework should detect **FastAPI** (entrypoint `main.py` → `app`).
+3. Env (optional): `FRONTEND_ORIGIN=https://aetherleaf.vercel.app`
 4. Deploy.
-
-Entrypoint is `app/main.py` (`app = FastAPI()`). Do **not** add catch-all rewrites to `api/index` — that breaks `/predict`.
 
 ### Endpoints
 
@@ -30,7 +27,4 @@ Entrypoint is `app/main.py` (`app = FastAPI()`). Do **not** add catch-all rewrit
 - `GET /health`
 - `POST /predict` (multipart field `file`)
 
-## Notes
-
-- Model file: `models/potato_disease.tflite` (must be committed).
-- Production uses `ai-edge-litert` (not full TensorFlow).
+Model file `models/potato_disease.tflite` must stay in the repo.

@@ -8,13 +8,13 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from app.config import (
+from core.config import (
     CLASS_NAMES,
     DISPLAY_NAMES,
     IMAGE_SIZE,
     resolve_model_path,
 )
-from app.schemas import ClassProbability, PredictionResponse
+from core.schemas import ClassProbability, PredictionResponse
 
 
 def _load_interpreter(model_path: Path):
