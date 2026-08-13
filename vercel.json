@@ -1,15 +1,9 @@
 {
   "functions": {
-    "api/index.py": {
+    "app/main.py": {
       "maxDuration": 60,
       "memory": 1024,
       "includeFiles": "models/**"
     }
-  },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api/index"
-    }
-  ]
+  }
 }

@@ -53,6 +53,7 @@ def allowed_origins() -> list[str]:
         "http://127.0.0.1:5173",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "https://aetherleaf.vercel.app",
     ]
     extra = os.getenv("FRONTEND_ORIGIN") or os.getenv("CORS_ORIGINS") or ""
     for item in extra.split(","):
