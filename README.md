@@ -1,30 +1,17 @@
 # Potato Disease Classifier — Backend (Vercel)
 
-FastAPI + TFLite inference for **Early Blight**, **Late Blight**, and **Healthy**.
-
-## Local run
+## Local
 
 ```bash
-cd backend
-python -m venv .venv
-# Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-# Optional local fallback if LiteRT fails on Windows:
-# pip install tensorflow
-uvicorn main:app --reload --host 127.0.0.1 --port 8000
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-## Deploy on Vercel (this folder = repo root)
+## Vercel
 
-1. Push this repo to GitHub and import in Vercel.
-2. Framework should detect **FastAPI** (entrypoint `main.py` → `app`).
-3. Env (optional): `FRONTEND_ORIGIN=https://aetherleaf.vercel.app`
-4. Deploy.
+- Entrypoint: `app/main.py` (`app = FastAPI()`)
+- After pushing, open Vercel → **Deployments** and confirm the latest commit is live
+- If still 404, click **Redeploy** (clear cache)
+- Env: `FRONTEND_ORIGIN=https://aetherleaf.vercel.app`
 
-### Endpoints
-
-- `GET /`
-- `GET /health`
-- `POST /predict` (multipart field `file`)
-
-Model file `models/potato_disease.tflite` must stay in the repo.
+Endpoints: `GET /`, `GET /health`, `POST /predict`

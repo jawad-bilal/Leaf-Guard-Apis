@@ -1,16 +1,16 @@
 from pathlib import Path
 
-from fastapi import FastAPI, File, HTTPException, Request, UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
-from core.config import ALLOWED_EXTENSIONS, MAX_UPLOAD_BYTES, allowed_origins, resolve_model_path
-from core.schemas import HealthResponse, PredictionResponse
-from core.services.predictor import get_predictor
+from app.config import ALLOWED_EXTENSIONS, MAX_UPLOAD_BYTES, allowed_origins, resolve_model_path
+from app.schemas import HealthResponse, PredictionResponse
+from app.services.predictor import get_predictor
 
 app = FastAPI(
     title="Potato Disease Classifier API",
     description="CNN inference for Early Blight, Late Blight, and Healthy potato leaves.",
-    version="1.0.0",
+    version="1.0.1",
 )
 
 app.add_middleware(
@@ -60,12 +60,13 @@ async def predict(file: UploadFile = File(...)) -> PredictionResponse:
 
 
 @app.get("/")
-def root(request: Request) -> dict[str, str]:
+def root() -> dict[str, str]:
     return {
         "message": "Potato Disease Classifier API",
+        "status": "online",
+        "build": "aetherleaf-api-v2",
         "docs": "/docs",
         "health": "/health",
-        "predict": "POST /predict (multipart form field: file)",
+        "predict": "POST /predict",
         "model": str(resolve_model_path()),
-        "path": request.url.path,
     }
