@@ -2,9 +2,9 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
-.env
 .vercel
 uploads/
 *.log
-_convert_tflite.py
 .ipynb_checkpoints/
+config.bat
+node_modules
